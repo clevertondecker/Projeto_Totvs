@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.Aluno;
-import br.com.totvs.sistemaescolar.core.aluno.repository.AlunoRepository;
+import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoDomainRepository;
 
 @Service
 public class UserCommandService {
 	
 	@Autowired
-	AlunoRepository alunoRepository;
+	AlunoDomainRepository alunoDomainRepository;
 
 	public Aluno adicionar(Aluno u) {
 		System.out.println("repository : "+ u.toString());
