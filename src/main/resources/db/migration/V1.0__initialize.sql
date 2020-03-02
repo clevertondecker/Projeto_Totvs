@@ -1,0 +1,11 @@
+CREATE TABLE aluno (
+	id VARCHAR(36) NOT NULL,
+	data JSONB NOT NULL,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE professor (
+	id VARCHAR(36) NOT NULL,
+	data JSONB NOT NULL,
+	PRIMARY KEY(id)
+);
