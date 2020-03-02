@@ -5,19 +5,21 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.totvs.tjf.core.validation.ValidatorService;
 
 import br.com.totvs.sistemaescolar.core.aluno.application.AlunoApplicationService;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.Aluno;
+import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoDomainRepository;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
+import br.com.totvs.sistemaescolar.core.aluno.service.UserCommandService;
 import br.com.totvs.sistemaescolar.core.exception.CriarAlunoException;
 import br.com.totvs.sistemaescolar.core.response.api.Response;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +32,7 @@ import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping("/api/v1/alunos/")
 public class AlunoController {
+	
 
 	@Autowired
 	private AlunoApplicationService service;
@@ -45,21 +48,33 @@ public class AlunoController {
 
 	@PostMapping
 	@RequestMapping("adicionar")
-	public ResponseEntity<Response<Aluno>> adicionarAluno(@Valid @RequestBody CriarAlunoCommandDto alunoDto,
+	public ResponseEntity<Response<CriarAlunoCommandDto>> adicionarAluno(@Valid @RequestBody CriarAlunoCommandDto alunoDto,
 			BindingResult result) {
 
-		validator.validate(alunoDto).ifPresent(violations -> {
-			throw new CriarAlunoException(violations);
+		validator.validate(alunoDto).ifPresent( violations -> { 
+			throw new CriarAlunoException(violations); 
 		});
-
-		var cmd = CriarAlunoCommand.of(AlunoId.generate(), alunoDto.getNome(), alunoDto.getEmail(), alunoDto.getCpf(),
-				alunoDto.getFormaIngresso(), alunoDto.getMatricula());
-
+		
+		var cmd = CriarAlunoCommand.of(
+				AlunoId.generate(),
+				alunoDto.getNome(),
+				alunoDto.getEmail(),
+				alunoDto.getCpf(),
+				alunoDto.getFormaIngresso(),
+				alunoDto.getMatricula());
+		
 		AlunoId id = service.handle(cmd);
+			
+		Response<CriarAlunoCommandDto> response = new Response<CriarAlunoCommandDto>();
 
-		return ResponseEntity
-				.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/").path(id.toString()).build().toUri())
-				.build();
+		if (result.hasErrors()) {
+			result.getAllErrors().forEach(e -> response.getErrors().add(e.getDefaultMessage()));
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+
+		response.setData(alunoDto);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
 }

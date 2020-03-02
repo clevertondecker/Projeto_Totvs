@@ -1,7 +1,5 @@
 package br.com.totvs.sistemaescolar.core.aluno.application;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +9,6 @@ import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoDomainRepository
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
 
 @Service
-@Transactional
 public class AlunoApplicationService {
 
 	@Autowired
