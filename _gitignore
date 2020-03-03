@@ -15,7 +15,7 @@ target/
 _*
 docker*
 HELP.md
-mvn*
+mvnw*
 
 ### IntelliJ IDEA ###
 .idea
