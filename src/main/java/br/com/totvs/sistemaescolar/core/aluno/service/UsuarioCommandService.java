@@ -6,11 +6,9 @@ import org.springframework.stereotype.Service;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoDomainRepository;
 
 @Service
-public class UserCommandService {
+public class UsuarioCommandService {
 	
 	@Autowired
 	AlunoDomainRepository alunoDomainRepository;
-
-
 	
 }

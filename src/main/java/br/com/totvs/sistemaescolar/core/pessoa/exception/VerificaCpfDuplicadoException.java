@@ -1,4 +1,4 @@
-package br.com.totvs.sistemaescolar.core.aluno.exception;
+package br.com.totvs.sistemaescolar.core.pessoa.exception;
 
 import com.totvs.tjf.api.context.stereotype.ApiErrorParameter;
 import com.totvs.tjf.api.context.stereotype.error.ApiBadRequest;

@@ -1,4 +1,4 @@
-package br.com.totvs.sistemaescolar.core.aluno.api;
+package br.com.totvs.sistemaescolar.core.professor.api;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -15,51 +15,46 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.totvs.tjf.core.validation.ValidatorService;
 
-import br.com.totvs.sistemaescolar.core.aluno.application.AlunoApplicationService;
-import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
+
 import br.com.totvs.sistemaescolar.core.aluno.exception.CriarAlunoException;
 import br.com.totvs.sistemaescolar.core.pessoa.domain.model.CPF;
+import br.com.totvs.sistemaescolar.core.professor.application.ProfessorApplicationService;
+import br.com.totvs.sistemaescolar.core.professor.domain.model.ProfessorId;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-
 @RestController
-@RequestMapping("/api/v1/alunos/")
-public class AlunoController {
-	
+@RequestMapping("/api/v1/professores/")
+public class ProfessorController {
+
 	@Autowired
-	private AlunoApplicationService service;
+	private ProfessorApplicationService service;
 
 	@Autowired
 	private ValidatorService validator;
-
-//	 private static final Logger log =
-//	 LoggerFactory.getLogger(UserCommandService.class);
-
-	@ApiOperation(value = "API para adicionar um aluno", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "Aluno criado."), })
-
+	
+	@ApiOperation(value = "API para adicionar um professores", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Professor criado."), })
+	
 	@PostMapping
 	@RequestMapping("adicionar")
-	public ResponseEntity<Void> adicionarAluno(@Valid @RequestBody CriarAlunoCommandDto alunoDto,
+	public ResponseEntity<Void> adicionarProfessor(@Valid @RequestBody CriarProfessorCommandDto professorDto,
 			BindingResult result) {
 
-		validator.validate(alunoDto).ifPresent( violations -> { 
+		validator.validate(professorDto).ifPresent( violations -> { 
 			throw new CriarAlunoException(violations); 
 		});
 			
-		var cmd = CriarAlunoCommand.of(
-				AlunoId.generate(),
-				alunoDto.getNome(),
-				alunoDto.getEmail(),
-				CPF.of(alunoDto.getCpf().getNumero()),
-				alunoDto.getFormaIngresso(),
-				alunoDto.getMatricula());
+		var cmd = CriarProfessorCommand.of(
+				ProfessorId.generate(),
+				professorDto.getNome(),
+				professorDto.getEmail(),
+				CPF.of(professorDto.getCpf().getNumero()),
+				professorDto.getTitulo());
+			
 		
-		AlunoId id = service.handle(cmd);
+		ProfessorId id = service.handle(cmd);
 			
 		return ResponseEntity.created(
 				ServletUriComponentsBuilder

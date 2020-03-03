@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
 import br.com.totvs.sistemaescolar.core.aluno.enums.formaDeIngresso;
+import br.com.totvs.sistemaescolar.core.pessoa.exception.CpfCommandDto;
 import lombok.Getter;
 
 @Getter
@@ -21,7 +22,7 @@ public class CriarAlunoCommandDto {
 	private formaDeIngresso formaIngresso;
 
 	@NotNull(message = "{AdicionarAlunoCommandDto.nome.NotNull}")
-	@Size(min = 2, max = 25, message = "{CriarChegadaAgendadaCommandDto.nome.Size}")
+	@Size(min = 2, max = 25, message = "{AdicionarAlunoCommandDto.nome.Size}")
 	private String nome;
 
 	@NotNull(message = "{AdicionarAlunoCommandDto.email.NotNull}")

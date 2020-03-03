@@ -1,4 +1,4 @@
-package br.com.totvs.sistemaescolar.core.aluno.api;
+package br.com.totvs.sistemaescolar.core.pessoa.exception;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

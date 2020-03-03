@@ -1,8 +1,8 @@
-package br.com.totvs.sistemaescolar.core.aluno.domain.model;
+package br.com.totvs.sistemaescolar.core.pessoa.domain.model;
 
 import javax.validation.constraints.NotNull;
 
-import br.com.totvs.sistemaescolar.core.aluno.exception.CpfDeveSerValidoException;
+import br.com.totvs.sistemaescolar.core.pessoa.exception.CpfDeveSerValidoException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

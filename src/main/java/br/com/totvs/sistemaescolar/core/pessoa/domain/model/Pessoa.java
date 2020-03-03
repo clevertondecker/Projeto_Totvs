@@ -1,6 +1,5 @@
 package br.com.totvs.sistemaescolar.core.pessoa.domain.model;
 
-import br.com.totvs.sistemaescolar.core.aluno.domain.model.CPF;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -1,11 +1,11 @@
-package br.com.totvs.sistemaescolar.core.aluno.domain.model;
+package br.com.totvs.sistemaescolar.core.professor.domain.model;
 
 import com.totvs.tjf.core.stereotype.Aggregate;
 import com.totvs.tjf.core.stereotype.AggregateIdentifier;
 
-import br.com.totvs.sistemaescolar.core.aluno.enums.formaDeIngresso;
 import br.com.totvs.sistemaescolar.core.pessoa.domain.model.CPF;
 import br.com.totvs.sistemaescolar.core.pessoa.domain.model.Pessoa;
+import br.com.totvs.sistemaescolar.core.professor.enums.Titulacao;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,20 +14,17 @@ import lombok.NonNull;
 @Getter
 @Aggregate
 @NoArgsConstructor
-public class Aluno extends Pessoa {
+public class Professor extends Pessoa {
 
 	@AggregateIdentifier
-	private AlunoId id;
-	private Long matricula;
-	private formaDeIngresso formaIngresso;
+	private ProfessorId id;
+	private Titulacao titulo;
 
 	@Builder
-	public Aluno(@NonNull AlunoId id, String nome, String email, CPF cpf, Long matricula,
-			formaDeIngresso formaIngresso) {
+	public Professor(@NonNull ProfessorId id, String nome, String email, CPF cpf, Titulacao titulo) {
 		super(nome, email, cpf);
 		this.id = id;
-		this.matricula = matricula;
-		this.formaIngresso = formaIngresso;
-	}
+		this.titulo = titulo;
 
+	}
 }

@@ -1,4 +1,4 @@
-package br.com.totvs.sistemaescolar.core.aluno.repository;
+package br.com.totvs.sistemaescolar.core.professor.repository;
 
 import java.sql.Types;
 
@@ -10,25 +10,25 @@ import org.springframework.stereotype.Repository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.totvs.tjf.repository.aggregate.CrudAggregateRepository;
 
-import br.com.totvs.sistemaescolar.core.aluno.domain.model.Aluno;
-import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoDomainRepository;
+import br.com.totvs.sistemaescolar.core.professor.domain.model.Professor;
+import br.com.totvs.sistemaescolar.core.professor.domain.model.ProfessorDomainRepository;
 
 @Repository
-public class AlunoRepository extends CrudAggregateRepository<Aluno, String> implements AlunoDomainRepository  {
+public class ProfessorRepository extends CrudAggregateRepository<Professor, String>
+		implements ProfessorDomainRepository {
 
-	public AlunoRepository(EntityManager em, ObjectMapper mapper) {
+	public ProfessorRepository(EntityManager em, ObjectMapper mapper) {
 		super(em, mapper.copy());
 	}
-	
+
 	@Override
 	protected String getTableName() {
-		return "aluno";
-	}
-	
-	public boolean checkIfExistsByCpf(String cpf) {
-		System.out.println("CPF "+ cpf);
-		return this.exists("data->'cpf'->>'numero' = ?", new SqlParameterValue(Types.VARCHAR, cpf));
+		return "professor";
 	}
 
+	public boolean checkIfExistsByCpf(String cpf) {
+		System.out.println("CPF " + cpf);
+		return this.exists("data->'cpf'->>'numero' = ?", new SqlParameterValue(Types.VARCHAR, cpf));
+	}
 
 }
