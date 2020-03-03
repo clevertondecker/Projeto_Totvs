@@ -12,7 +12,6 @@ public class CPF {
 
 	@NotNull
 	private String numero;
-	private String arquivo;
 
 	private CPF(String numero) {
 		if (isInvalid(numero))

@@ -1,7 +1,10 @@
 package br.com.totvs.sistemaescolar.core.aluno.repository;
 
+import java.sql.Types;
+
 import javax.persistence.EntityManager;
 
+import org.springframework.jdbc.core.SqlParameterValue;
 import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,5 +19,11 @@ public class AlunoRepository extends CrudAggregateRepository<Aluno, String> impl
 	public AlunoRepository(EntityManager em, ObjectMapper mapper) {
 		super(em, mapper);
 	}
+	
+	public boolean  checkIfExistsByCpf(String cpf) {
+		System.out.println("CPF "+ cpf);
+		return this.exists("data->'cpf'->>'numero' = ?", new SqlParameterValue(Types.VARCHAR, cpf));
+	}
+
 
 }
