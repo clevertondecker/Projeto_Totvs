@@ -15,6 +15,7 @@ public class AlunoApplicationService {
 	AlunoDomainRepository alunoDomainRepository;
 
 	public AlunoId handle(final CriarAlunoCommand cmd) {
+		AlunoId alunoId = cmd.getId() != null ? cmd.getId() : AlunoId.generate();
 
 		Aluno aluno = Aluno.builder()
 				.id(AlunoId.generate())

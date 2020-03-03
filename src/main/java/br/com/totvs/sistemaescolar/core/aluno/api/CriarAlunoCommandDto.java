@@ -28,8 +28,7 @@ public class CriarAlunoCommandDto {
 	@Email(message = "{AdicionarAlunoCommandDto.email.Emailinvalido}")
 	private String email;
 
-	@NotNull(message = "{AdicionarAlunoCommandDto.cpf.NotNull}")
 	@Valid
-	private String cpf;
+	private CpfCommandDto cpf;
 
 }

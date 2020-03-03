@@ -5,7 +5,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +17,8 @@ import com.totvs.tjf.core.validation.ValidatorService;
 
 import br.com.totvs.sistemaescolar.core.aluno.application.AlunoApplicationService;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
-import br.com.totvs.sistemaescolar.core.exception.CriarAlunoException;
-import br.com.totvs.sistemaescolar.core.response.api.Response;
+import br.com.totvs.sistemaescolar.core.aluno.domain.model.CPF;
+import br.com.totvs.sistemaescolar.core.aluno.exception.CriarAlunoException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -58,7 +57,7 @@ public class AlunoController {
 				AlunoId.generate(),
 				alunoDto.getNome(),
 				alunoDto.getEmail(),
-				alunoDto.getCpf(),
+				CPF.of(alunoDto.getCpf().getNumero()),
 				alunoDto.getFormaIngresso(),
 				alunoDto.getMatricula());
 		

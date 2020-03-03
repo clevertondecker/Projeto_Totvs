@@ -21,7 +21,7 @@ public class Aluno extends Pessoa {
 	private formaDeIngresso formaIngresso;
 
 	@Builder
-	public Aluno(@NonNull AlunoId id, String nome, String email, String cpf, Long matricula,
+	public Aluno(@NonNull AlunoId id, String nome, String email, CPF cpf, Long matricula,
 			formaDeIngresso formaIngresso) {
 		super(nome, email, cpf);
 		this.id = id;
