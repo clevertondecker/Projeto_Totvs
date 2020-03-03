@@ -1,5 +1,6 @@
 package br.com.totvs.sistemaescolar.core.aluno.api;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,23 +13,23 @@ import lombok.Getter;
 public class CriarAlunoCommandDto {
 
 	private AlunoId id;
-	
+
 	@NotNull(message = "{AdicionarAlunoCommandDto.matricula.NotNull}")
 	private Long matricula;
-	
+
 	@NotNull(message = "{AdicionarAlunoCommandDto.formaDeIngresso.NotNull}")
 	private formaDeIngresso formaIngresso;
-	
+
 	@NotNull(message = "{AdicionarAlunoCommandDto.nome.NotNull}")
-	@Size(min=2, max=25, message="{CriarChegadaAgendadaCommandDto.nome.Size}")
+	@Size(min = 2, max = 25, message = "{CriarChegadaAgendadaCommandDto.nome.Size}")
 	private String nome;
-	
+
 	@NotNull(message = "{AdicionarAlunoCommandDto.email.NotNull}")
-    @Email(message = "{AdicionarAlunoCommandDto.email.Emailinvalido}")
+	@Email(message = "{AdicionarAlunoCommandDto.email.Emailinvalido}")
 	private String email;
-	
+
 	@NotNull(message = "{AdicionarAlunoCommandDto.cpf.NotNull}")
+	@Valid
 	private String cpf;
-	
- 
+
 }
