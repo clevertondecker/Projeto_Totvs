@@ -2,6 +2,8 @@ package br.com.totvs.sistemaescolar.core.turma.api;
 
 import javax.validation.constraints.NotNull;
 
+import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
+import br.com.totvs.sistemaescolar.core.disciplina.domain.model.DisciplinaId;
 import br.com.totvs.sistemaescolar.core.turma.domain.model.TurmaId;
 import lombok.Getter;
 
@@ -22,7 +24,7 @@ public class CriarTurmaCommandDto {
 	@NotNull(message = "{CriarTurmaCommandDto.numeroVagas.NotNull}")
 	private int numeroVagas;
 
-	private String alunoId;
-	private String disciplinaId;
+	private AlunoId alunoId;
+	private DisciplinaId disciplinaId;
 
 }

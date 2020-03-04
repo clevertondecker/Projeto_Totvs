@@ -24,8 +24,8 @@ public class TurmaApplicationService {
 				.anoLetivo(cmd.getAnoLetivo())
 				.periodoLetivo(cmd.getPeriodoLetivo())
 				.numeroVagas(cmd.getNumeroVagas())
-//				.aluno(cmd.getAlunoId())
-//				.disciplina(cmd.getDisciplinaId())
+				.alunoId(cmd.getAlunoId())
+//				.disciplina.add(cmd.getDisciplinaId())
 				.build();
 
 		this.turmaDomainRepository.insert(turma);

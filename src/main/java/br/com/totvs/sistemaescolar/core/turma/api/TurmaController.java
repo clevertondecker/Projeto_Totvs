@@ -15,8 +15,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.totvs.tjf.core.validation.ValidatorService;
 
-import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
-import br.com.totvs.sistemaescolar.core.aluno.exception.CriarAlunoException;
 import br.com.totvs.sistemaescolar.core.turma.application.TurmaApplicationService;
 import br.com.totvs.sistemaescolar.core.turma.domain.model.TurmaId;
 import br.com.totvs.sistemaescolar.core.turma.exception.CriarTurmaException;

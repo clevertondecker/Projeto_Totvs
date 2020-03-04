@@ -1,5 +1,7 @@
 package br.com.totvs.sistemaescolar.core.turma.api;
 
+import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
+import br.com.totvs.sistemaescolar.core.disciplina.domain.model.DisciplinaId;
 import br.com.totvs.sistemaescolar.core.turma.domain.model.TurmaId;
 import lombok.Data;
 
@@ -13,11 +15,11 @@ public final class CriarTurmaCommand {
 	private final int periodoLetivo;
 	private final int numeroVagas;
 
-	private final String alunoId;
-	private final String disciplinaId;
+	private final AlunoId alunoId;
+	private final DisciplinaId disciplinaId;
 
 	public static CriarTurmaCommand of(String decricao, int anoLetivo, int periodoLetivo, int numeroVagas,
-			String alunoid, String disciplinaId) {
+			AlunoId alunoid, DisciplinaId disciplinaId) {
 		return new CriarTurmaCommand(null, decricao, anoLetivo, periodoLetivo, numeroVagas, alunoid, disciplinaId);
 	}
 
