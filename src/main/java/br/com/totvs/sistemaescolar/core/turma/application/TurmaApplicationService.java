@@ -18,7 +18,6 @@ public class TurmaApplicationService {
 
 		//busca id do aluno no banco e resgata para atribuir abaixo
 		
-		
 		Turma turma = Turma.builder()
 				.id(TurmaId.generate())
 				.descricao(cmd.getDecricao())

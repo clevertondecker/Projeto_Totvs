@@ -7,7 +7,7 @@ import com.totvs.tjf.core.stereotype.Aggregate;
 import com.totvs.tjf.core.stereotype.AggregateIdentifier;
 
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.Aluno;
-import br.com.totvs.sistemaescolar.core.disciplina.Disciplina;
+import br.com.totvs.sistemaescolar.core.disciplina.domain.model.Disciplina;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,13 +24,13 @@ public class Turma {
 	private int anoLetivo;
 	private int periodoLetivo;
 	private int numeroVagas;
-	
-	
+
 	List<Aluno> alunos = new ArrayList<>();
 	List<Disciplina> disciplinas = new ArrayList<>();
 
 	@Builder
-	public Turma(@NonNull TurmaId id, String descricao, int anoLetivo, int periodoLetivo, int numeroVagas,List<Aluno> aluno, List<Disciplina> disciplina) {
+	public Turma(@NonNull TurmaId id, String descricao, int anoLetivo, int periodoLetivo, int numeroVagas,
+			List<Aluno> aluno, List<Disciplina> disciplina) {
 		this.id = id;
 		Descricao = descricao;
 		this.anoLetivo = anoLetivo;
@@ -39,6 +39,5 @@ public class Turma {
 		this.disciplinas = disciplina;
 		this.alunos = aluno;
 	}
-	
 
 }

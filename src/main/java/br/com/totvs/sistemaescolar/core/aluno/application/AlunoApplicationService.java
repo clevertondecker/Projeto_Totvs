@@ -7,7 +7,6 @@ import br.com.totvs.sistemaescolar.core.aluno.api.CriarAlunoCommand;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.Aluno;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoDomainRepository;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
-import br.com.totvs.sistemaescolar.core.pessoa.exception.VerificaCpfDuplicadoException;
 
 @Service
 public class AlunoApplicationService {

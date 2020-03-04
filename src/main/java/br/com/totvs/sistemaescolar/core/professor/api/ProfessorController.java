@@ -16,10 +16,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.totvs.tjf.core.validation.ValidatorService;
 
 
-import br.com.totvs.sistemaescolar.core.aluno.exception.CriarAlunoException;
 import br.com.totvs.sistemaescolar.core.pessoa.domain.model.CPF;
 import br.com.totvs.sistemaescolar.core.professor.application.ProfessorApplicationService;
 import br.com.totvs.sistemaescolar.core.professor.domain.model.ProfessorId;
+import br.com.totvs.sistemaescolar.core.professor.exception.CriarProfessorException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -43,7 +43,7 @@ public class ProfessorController {
 			BindingResult result) {
 
 		validator.validate(professorDto).ifPresent( violations -> { 
-			throw new CriarAlunoException(violations); 
+			throw new CriarProfessorException(violations); 
 		});
 			
 		var cmd = CriarProfessorCommand.of(

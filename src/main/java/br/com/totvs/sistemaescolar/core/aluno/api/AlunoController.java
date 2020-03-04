@@ -58,7 +58,7 @@ public class AlunoController {
 				CPF.of(alunoDto.getCpf().getNumero()),
 				alunoDto.getFormaIngresso(),
 				alunoDto.getMatricula(),
-				alunoDto.getTurma());
+				alunoDto.getTurmaId());
 		
 		AlunoId id = service.handle(cmd);
 			

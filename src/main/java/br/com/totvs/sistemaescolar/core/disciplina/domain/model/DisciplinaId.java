@@ -1,4 +1,4 @@
-package br.com.totvs.sistemaescolar.core.disciplina;
+package br.com.totvs.sistemaescolar.core.disciplina.domain.model;
 
 import java.util.UUID;
 

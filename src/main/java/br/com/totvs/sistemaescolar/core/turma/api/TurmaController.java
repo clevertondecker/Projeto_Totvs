@@ -19,6 +19,7 @@ import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
 import br.com.totvs.sistemaescolar.core.aluno.exception.CriarAlunoException;
 import br.com.totvs.sistemaescolar.core.turma.application.TurmaApplicationService;
 import br.com.totvs.sistemaescolar.core.turma.domain.model.TurmaId;
+import br.com.totvs.sistemaescolar.core.turma.exception.CriarTurmaException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -40,7 +41,7 @@ public class TurmaController {
 //	 LoggerFactory.getLogger(UserCommandService.class);
 
 	@ApiOperation(value = "API para adicionar uma turma", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "Turma criado."), })
+	@ApiResponses(value = { @ApiResponse(code = 201, message = "Turma criada."), })
 
 	@PostMapping
 	@RequestMapping("adicionar")
@@ -48,7 +49,7 @@ public class TurmaController {
 			BindingResult result) {
 
 		validator.validate(turmaDto).ifPresent( violations -> { 
-			throw new CriarAlunoException(violations); 
+			throw new CriarTurmaException(violations); 
 		});
 			
 		var cmd = CriarTurmaCommand.of(
