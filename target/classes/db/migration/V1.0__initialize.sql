@@ -4,6 +4,18 @@ CREATE TABLE aluno (
 	PRIMARY KEY(id)
 );
 
+CREATE TABLE turma (
+	id VARCHAR(36) NOT NULL,
+	data JSONB NOT NULL,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE disciplina (
+	id VARCHAR(36) NOT NULL,
+	data JSONB NOT NULL,
+	PRIMARY KEY(id)
+);
+
 CREATE TABLE professor (
 	id VARCHAR(36) NOT NULL,
 	data JSONB NOT NULL,

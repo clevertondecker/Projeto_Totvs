@@ -2,7 +2,6 @@ package br.com.totvs.sistemaescolar.core.aluno.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.totvs.tjf.core.stereotype.Aggregate;
 import com.totvs.tjf.core.stereotype.AggregateIdentifier;
@@ -25,11 +24,12 @@ public class Aluno extends Pessoa {
 	private AlunoId id;
 	private Long matricula;
 	private formaDeIngresso formaIngresso;
-	private Optional<Turma> turma;
+	
+	private List<Turma> turma = new ArrayList<>();
 
 	@Builder
 	public Aluno(@NonNull AlunoId id, String nome, String email, CPF cpf, Long matricula,
-			formaDeIngresso formaIngresso, Optional<Turma> turma) {
+			formaDeIngresso formaIngresso, List<Turma> turma) {
 		super(nome, email, cpf);
 		this.id = id;
 		this.matricula = matricula;

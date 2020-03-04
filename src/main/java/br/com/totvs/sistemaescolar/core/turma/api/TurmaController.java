@@ -53,12 +53,12 @@ public class TurmaController {
 			
 		var cmd = CriarTurmaCommand.of(
 				TurmaId.generate(),
-				turmaDto.getDecricao(),
+				turmaDto.getDescricao(),
 				turmaDto.getAnoLetivo(),
 				turmaDto.getPeriodoLetivo(),
 				turmaDto.getNumeroVagas(),
-				turmaDto.getAluno(),
-				turmaDto.getDisciplina());
+				turmaDto.getAlunoId(),
+				turmaDto.getDisciplinaId());
 		
 		TurmaId id = service.handle(cmd);
 			
