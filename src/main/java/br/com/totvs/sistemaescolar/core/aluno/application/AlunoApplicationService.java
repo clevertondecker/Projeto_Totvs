@@ -24,6 +24,7 @@ public class AlunoApplicationService {
 				.cpf(cmd.getCpf())
 				.formaIngresso(cmd.getFormaIngresso())
 				.matricula(cmd.getMatricula())
+				.turmaId(cmd.getTurmaId())
 				.build();
 		
 		//Verificar porque nao encontra
