@@ -1,5 +1,8 @@
 package br.com.totvs.sistemaescolar.core.professor.api;
 
+import java.util.List;
+
+import br.com.totvs.sistemaescolar.core.disciplina.domain.model.DisciplinaId;
 import br.com.totvs.sistemaescolar.core.pessoa.domain.model.CPF;
 import br.com.totvs.sistemaescolar.core.professor.domain.model.ProfessorId;
 import br.com.totvs.sistemaescolar.core.professor.enums.Titulacao;
@@ -13,9 +16,12 @@ public class CriarProfessorCommand {
 	private final String email;
 	private final CPF cpf;
 	private final Titulacao titulo;
+	
+	public final List<DisciplinaId> disciplinas;
 
-	public static CriarProfessorCommand of(String nome, String email, CPF cpf, Titulacao titulo) {
-		return new CriarProfessorCommand(null, nome, email, cpf, titulo);
+	public static CriarProfessorCommand of(String nome, String email, CPF cpf, Titulacao titulo,
+			List<DisciplinaId> disciplinas) {
+		return new CriarProfessorCommand(null, nome, email, cpf, titulo,disciplinas);
 	}
 
 }

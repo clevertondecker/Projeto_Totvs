@@ -3,7 +3,6 @@ package br.com.totvs.sistemaescolar.core.professor.application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.totvs.sistemaescolar.core.pessoa.exception.VerificaCpfDuplicadoException;
 import br.com.totvs.sistemaescolar.core.professor.api.CriarProfessorCommand;
 import br.com.totvs.sistemaescolar.core.professor.domain.model.Professor;
 import br.com.totvs.sistemaescolar.core.professor.domain.model.ProfessorDomainRepository;
@@ -24,11 +23,8 @@ public class ProfessorApplicationService {
 				.email(cmd.getEmail())
 				.cpf(cmd.getCpf())
 				.titulo(cmd.getTitulo())
+				.disciplinas(cmd.getDisciplinas())
 				.build();
-
-//		if (this.professorDomainRepository.checkIfExistsByCpf(cmd.getCpf().getNumero()))
-//		throw new VerificaCpfDuplicadoException(cmd.getCpf().getNumero());
-
 		
 		this.professorDomainRepository.insert(professor);
 		return professor.getId();

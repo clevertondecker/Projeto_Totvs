@@ -26,7 +26,7 @@ public class Disciplina {
 	private String sigla;
 	private int cargaHoraria;
 
-	List<ProfessorId> professores = new ArrayList<>();
+	List<ProfessorId> professor = new ArrayList<>();
 	List<TurmaId> turmas = new ArrayList<>();
 
 	@Builder
@@ -38,7 +38,7 @@ public class Disciplina {
 		this.cargaHoraria = cargaHoraria;
 
 		if (professor != null)
-			this.professores.addAll(professor);
+			this.professor.addAll(professor);
 
 		if (turma != null)
 			this.turmas.addAll(turma);
