@@ -25,7 +25,6 @@ public class DisciplinaApplicationService {
 				.turma(cmd.getTurmaId())
 				.build();
 		
-		
 		this.disciplinaDomainRepository.insert(disciplina);
 		return disciplina.getId();
 

@@ -29,6 +29,4 @@ public class AlunoRepository extends CrudAggregateRepository<Aluno, String> impl
 		System.out.println("CPF "+ cpf);
 		return this.exists("data->'cpf'->>'numero' = ?", new SqlParameterValue(Types.VARCHAR, cpf));
 	}
-
-
 }

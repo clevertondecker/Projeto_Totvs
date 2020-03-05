@@ -34,6 +34,7 @@ public class Aluno extends Pessoa {
 		this.id = id;
 		this.matricula = matricula;
 		this.formaIngresso = formaIngresso;
+		
 		if(turmaId !=null)
 		this.turmas.addAll(turmaId);
 	}

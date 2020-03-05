@@ -50,9 +50,6 @@ public class DisciplinaController {
 			throw new CriarDisciplinaException(violations);
 		});
 		
-		System.out.println("Controller: "+disciplinaDto.getProfessorId());
-		System.out.println("Controller1: "+disciplinaDto.getTurmaId());
-
 		var cmd = CriarDisciplinaCommand.of(DisciplinaId.generate(), 
 				disciplinaDto.getDescricao(),
 				disciplinaDto.getSigla(), 

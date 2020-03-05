@@ -7,6 +7,7 @@ import br.com.totvs.sistemaescolar.core.aluno.api.CriarAlunoCommand;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.Aluno;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoDomainRepository;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
+import br.com.totvs.sistemaescolar.core.pessoa.exception.VerificaCpfDuplicadoException;
 
 @Service
 public class AlunoApplicationService {
@@ -28,11 +29,11 @@ public class AlunoApplicationService {
 				.build();
 		
 		//Verificar porque nao encontra
-//		if (this.alunoDomainRepository.checkIfExistsByCpf(cmd.getCpf().getNumero()))
-//			throw new VerificaCpfDuplicadoException(cmd.getCpf().getNumero());
+		if (this.alunoDomainRepository.checkIfExistsByCpf(cmd.getCpf().getNumero()))
+			throw new VerificaCpfDuplicadoException(cmd.getCpf().getNumero());
 
-//		boolean cpfis = this.alunoDomainRepository.exists(cmd.getCpf().getNumero());
-//		System.out.println(cpfis);
+		boolean cpfis = this.alunoDomainRepository.exists(cmd.getCpf().getNumero());
+		System.out.println(cpfis);
 		
 		this.alunoDomainRepository.insert(aluno);
 		return aluno.getId();
