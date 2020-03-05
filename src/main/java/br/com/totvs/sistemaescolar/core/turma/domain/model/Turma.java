@@ -36,7 +36,11 @@ public class Turma {
 		this.anoLetivo = anoLetivo;
 		this.periodoLetivo = periodoLetivo;
 		this.numeroVagas = numeroVagas;
+		
+		if(alunoId !=null)
 		this.alunos.addAll(alunoId);
+		
+		if(disciplinaId !=null)
 		this.disciplinas.addAll(disciplinaId);
 	}
 
