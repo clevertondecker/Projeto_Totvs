@@ -49,10 +49,16 @@ public class DisciplinaController {
 		validator.validate(disciplinaDto).ifPresent(violations -> {
 			throw new CriarDisciplinaException(violations);
 		});
+		
+		System.out.println("Controller: "+disciplinaDto.getProfessorId());
+		System.out.println("Controller1: "+disciplinaDto.getTurmaId());
 
-		var cmd = CriarDisciplinaCommand.of(DisciplinaId.generate(), disciplinaDto.getDescricao(),
-				disciplinaDto.getSigla(), disciplinaDto.getCargaHoraria(), disciplinaDto.getTurma(),
-				disciplinaDto.getProfessor());
+		var cmd = CriarDisciplinaCommand.of(DisciplinaId.generate(), 
+				disciplinaDto.getDescricao(),
+				disciplinaDto.getSigla(), 
+				disciplinaDto.getCargaHoraria(), 
+				disciplinaDto.getTurmaId(),
+				disciplinaDto.getProfessorId());
 
 		DisciplinaId id = service.handle(cmd);
 

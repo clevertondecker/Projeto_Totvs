@@ -21,8 +21,8 @@ public class DisciplinaApplicationService {
 				.descricao(cmd.getDescricao())
 				.sigla(cmd.getSigla())
 				.cargaHoraria(cmd.getCargaHoraria())
-//				.professor(cmd.getProfessor())
-//				.turma(cmd.getTurma())
+				.professor(cmd.getProfessorId())
+				.turma(cmd.getTurmaId())
 				.build();
 		
 		
