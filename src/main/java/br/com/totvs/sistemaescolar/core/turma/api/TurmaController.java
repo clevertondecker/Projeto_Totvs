@@ -58,7 +58,6 @@ public class TurmaController {
 				turmaDto.getNumeroVagas(),
 				turmaDto.getAlunoId(),
 				turmaDto.getDisciplinaId());
-		
 		TurmaId id = service.handle(cmd);
 			
 		return ResponseEntity.created(
@@ -69,5 +68,6 @@ public class TurmaController {
 				.build().toUri())
 				.build();
 	}
+	
 
 }

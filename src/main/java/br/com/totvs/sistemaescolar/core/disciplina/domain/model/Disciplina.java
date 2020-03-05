@@ -10,10 +10,12 @@ import br.com.totvs.sistemaescolar.core.professor.domain.model.Professor;
 import br.com.totvs.sistemaescolar.core.turma.domain.model.Turma;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Getter
 @Aggregate
+@NoArgsConstructor
 public class Disciplina {
 
 	@AggregateIdentifier

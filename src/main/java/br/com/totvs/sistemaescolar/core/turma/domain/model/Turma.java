@@ -30,14 +30,14 @@ public class Turma {
 
 	@Builder
 	public Turma(@NonNull TurmaId id, String descricao, int anoLetivo, int periodoLetivo, int numeroVagas,
-			AlunoId alunoId, DisciplinaId disciplinaId) {
+			List<AlunoId> alunoId, List<DisciplinaId> disciplinaId) {
 		this.id = id;
 		Descricao = descricao;
 		this.anoLetivo = anoLetivo;
 		this.periodoLetivo = periodoLetivo;
 		this.numeroVagas = numeroVagas;
-		this.alunos.add(alunoId);
-		this.disciplinas.add(disciplinaId);
+		this.alunos.addAll(alunoId);
+		this.disciplinas.addAll(disciplinaId);
 	}
 
 }

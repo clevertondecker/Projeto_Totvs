@@ -15,8 +15,7 @@ public class TurmaApplicationService {
 	TurmaDomainRepository turmaDomainRepository;
 
 	public TurmaId handle(final CriarTurmaCommand cmd) {
-
-		//busca id do aluno no banco e resgata para atribuir abaixo
+		System.out.println("ALUNOID : "+cmd.getDisciplinaId());
 		
 		Turma turma = Turma.builder()
 				.id(TurmaId.generate())
@@ -25,7 +24,7 @@ public class TurmaApplicationService {
 				.periodoLetivo(cmd.getPeriodoLetivo())
 				.numeroVagas(cmd.getNumeroVagas())
 				.alunoId(cmd.getAlunoId())
-//				.disciplina.add(cmd.getDisciplinaId())
+				.disciplinaId(cmd.getDisciplinaId())
 				.build();
 
 		this.turmaDomainRepository.insert(turma);
