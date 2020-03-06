@@ -26,10 +26,6 @@ public class TurmaRepository extends CrudAggregateRepository<Turma, String> impl
 		return "turma";
 	}
 
-	@Override
-	public boolean checkIfExistsByDescricao(String descricao) {
-		return this.exists("data->'descricao'= ?", new SqlParameterValue(Types.VARCHAR, descricao));
-	}
 	
 	public Optional<Turma> getByTurmaId(String turmaId) {
 		return this.findOne("data->'id'->>'id' = ?", new SqlParameterValue(Types.VARCHAR, turmaId));

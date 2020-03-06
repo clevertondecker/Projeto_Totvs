@@ -29,30 +29,32 @@ public class AlunoApplicationService {
 	public AlunoId handle(final CriarAlunoCommand cmd) {
 		AlunoId alunoId = cmd.getId() != null ? cmd.getId() : AlunoId.generate();
 
+		/* Valida CPF , comentado para testes*/
 //		if (this.alunoRepository.checkIfExistsByCpf(cmd.getCpf().getNumero())) {
 //		throw new VerificaCpfDuplicadoException(cmd.getCpf().getNumero());
 //	}
 		
 		/*Cria aluno sem adicionar em nenhuma turma*/
 		 Aluno aluno = Aluno.builder()
-				.id(alunoId).nome(cmd.getNome())
+				.id(alunoId)
+				.nome(cmd.getNome())
 				.email(cmd.getEmail())
 				.cpf(cmd.getCpf())
 				.formaIngresso(cmd.getFormaIngresso())
 				.matricula(cmd.getMatricula())
 				.build();
-		 		
-		 		System.out.println("Sem turma");
-	 			 	
+		 			 			 	
 			 	//Recupera turma do banco de dados e adicionar o aluno.
-				Optional<Turma> optionalTurma = turmaRepository.getByTurmaId(cmd.getTurmaId().toString());
-				System.out.println("COM TURMA");
-				optionalTurma.ifPresent(turma -> {
+				if(cmd.getTurmaId()!=null) {
+		 		Optional<Turma> optionalTurma = turmaRepository.getByTurmaId(cmd.getTurmaId().toString());
+
+		 		optionalTurma.ifPresent(turma -> {
 					System.out.println("Presente");
 					turma.adicionarAluno(alunoId);
 					turmaRepository.update(turma);
 				});
-		
+				}
+				
 		this.alunoRepository.insert(aluno);
 		return aluno.getId();
 

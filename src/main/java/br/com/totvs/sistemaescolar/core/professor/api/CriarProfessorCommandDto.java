@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import br.com.totvs.sistemaescolar.core.disciplina.domain.model.DisciplinaId;
 import br.com.totvs.sistemaescolar.core.pessoa.exception.CpfCommandDto;
 import br.com.totvs.sistemaescolar.core.professor.domain.model.ProfessorId;
 import br.com.totvs.sistemaescolar.core.professor.enums.Titulacao;
@@ -30,5 +31,6 @@ public class CriarProfessorCommandDto {
 	@NotNull(message = "{AdicionarProfessorCommandDto.titulo.NotNull}")
 	private Titulacao titulo;
 	
+	private DisciplinaId disciplinaId;
 
 }

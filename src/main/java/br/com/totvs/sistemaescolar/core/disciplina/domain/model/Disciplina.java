@@ -6,9 +6,7 @@ import java.util.List;
 import com.totvs.tjf.core.stereotype.Aggregate;
 import com.totvs.tjf.core.stereotype.AggregateIdentifier;
 
-import br.com.totvs.sistemaescolar.core.professor.domain.model.Professor;
 import br.com.totvs.sistemaescolar.core.professor.domain.model.ProfessorId;
-import br.com.totvs.sistemaescolar.core.turma.domain.model.Turma;
 import br.com.totvs.sistemaescolar.core.turma.domain.model.TurmaId;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,7 +24,7 @@ public class Disciplina {
 	private String sigla;
 	private int cargaHoraria;
 
-	List<ProfessorId> professor = new ArrayList<>();
+	List<ProfessorId> professores = new ArrayList<>();
 	List<TurmaId> turmas = new ArrayList<>();
 
 	@Builder
@@ -38,11 +36,14 @@ public class Disciplina {
 		this.cargaHoraria = cargaHoraria;
 
 		if (professor != null)
-			this.professor.addAll(professor);
+			this.professores.addAll(professor);
 
 		if (turma != null)
 			this.turmas.addAll(turma);
-
+	}
+	
+	public void adicionarProfessor(ProfessorId professor) {
+		professores.add(professor);
 	}
 
 }

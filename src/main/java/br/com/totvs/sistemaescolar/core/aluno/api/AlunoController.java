@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +36,7 @@ public class AlunoController {
 	@Autowired
 	private ValidatorService validator;
 
-	@ApiOperation(value = "API para adicionar um aluno", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "API para adicionar um aluno já com uma turma, ou sem turma", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Aluno criado."), })
 
 	@PostMapping

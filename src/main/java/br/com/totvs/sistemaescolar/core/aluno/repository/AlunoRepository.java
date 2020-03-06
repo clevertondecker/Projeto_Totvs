@@ -31,7 +31,7 @@ public class AlunoRepository extends CrudAggregateRepository<Aluno, String> impl
 	}
 	
 	public Optional<Aluno> getByCpf(String cpf) {
-		return this.findOne("data->'cpf'->>'numero' = ?", new SqlParameterValue(Types.VARCHAR, cpf));
+		return this.findOne("data->'sigla' = ?", new SqlParameterValue(Types.VARCHAR, cpf));
 	}
 
 }

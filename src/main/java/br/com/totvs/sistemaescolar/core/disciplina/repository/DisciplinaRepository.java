@@ -1,7 +1,11 @@
 package br.com.totvs.sistemaescolar.core.disciplina.repository;
 
+import java.sql.Types;
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
 
+import org.springframework.jdbc.core.SqlParameterValue;
 import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,5 +26,11 @@ public class DisciplinaRepository extends CrudAggregateRepository<Disciplina, St
 	protected String getTableName() {
 		return "disciplina";
 	}
+
+	public Optional<Disciplina> getByDisciplinaId(String disciplinaId) {
+		return this.findOne("data->'id'->>'id' = ?", new SqlParameterValue(Types.VARCHAR, disciplinaId));
+	}
+
+	
 
 }
