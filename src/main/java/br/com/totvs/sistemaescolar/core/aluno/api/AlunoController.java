@@ -48,7 +48,7 @@ public class AlunoController {
 		validator.validate(alunoDto).ifPresent( violations -> { 
 			throw new AlunoJaExisteException(violations); 
 		});
-			
+					
 		var cmd = CriarAlunoCommand.of(
 				AlunoId.generate(),
 				alunoDto.getNome(),
@@ -56,7 +56,7 @@ public class AlunoController {
 				CPF.of(alunoDto.getCpf().getNumero()),
 				alunoDto.getFormaIngresso(),
 				alunoDto.getMatricula(),
-				alunoDto.getTurmaId());
+				turmaId);
 		
 		AlunoId id = service.handle(cmd);
 			

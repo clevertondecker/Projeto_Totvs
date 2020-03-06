@@ -22,16 +22,39 @@ public class AlunoApplicationService {
 	public AlunoId handle(final CriarAlunoCommand cmd) {
 		AlunoId alunoId = cmd.getId() != null ? cmd.getId() : AlunoId.generate();
 
-		Aluno aluno = Aluno.builder().id(alunoId).nome(cmd.getNome()).email(cmd.getEmail()).cpf(cmd.getCpf())
-				.formaIngresso(cmd.getFormaIngresso()).matricula(cmd.getMatricula()).build();
+//		if (this.alunoRepository.checkIfExistsByCpf(cmd.getCpf().getNumero())) {
+//		throw new VerificaCpfDuplicadoException(cmd.getCpf().getNumero());
+//	}
+		Aluno aluno = new Aluno();
 		
-		
-		if (this.alunoRepository.checkIfExistsByCpf(cmd.getCpf().getNumero())) {
-			throw new VerificaCpfDuplicadoException(cmd.getCpf().getNumero());
-		}
+		/*Cria aluno sem turma */
+		if(cmd.getTurmaId() == null) {
+		 aluno = Aluno.builder()
+				.id(alunoId).nome(cmd.getNome())
+				.email(cmd.getEmail())
+				.cpf(cmd.getCpf())
+				.formaIngresso(cmd.getFormaIngresso())
+				.matricula(cmd.getMatricula())
+				.build();
+		 System.out.println("Sem turma");
 
+		}
+		
+		/*Cria aluno com turma */
+		if(cmd.getTurmaId() !=null) {
+			 aluno = Aluno.builder()
+					.id(alunoId).nome(cmd.getNome())
+					.email(cmd.getEmail())
+					.cpf(cmd.getCpf())
+					.formaIngresso(cmd.getFormaIngresso())
+					.matricula(cmd.getMatricula())
+					.build();
+			 System.out.println("Com turma");
+		}
+		
 		this.alunoRepository.insert(aluno);
 		return aluno.getId();
+
 	}
 
 //		System.out.println("Entrou add turma: " + turmaId);

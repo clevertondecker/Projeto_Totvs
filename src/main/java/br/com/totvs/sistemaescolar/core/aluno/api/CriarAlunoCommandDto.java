@@ -1,6 +1,5 @@
 package br.com.totvs.sistemaescolar.core.aluno.api;
 
-import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -10,7 +9,6 @@ import javax.validation.constraints.Size;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
 import br.com.totvs.sistemaescolar.core.aluno.enums.formaDeIngresso;
 import br.com.totvs.sistemaescolar.core.pessoa.exception.CpfCommandDto;
-import br.com.totvs.sistemaescolar.core.turma.domain.model.TurmaId;
 import lombok.Getter;
 
 @Getter
@@ -35,6 +33,4 @@ public class CriarAlunoCommandDto {
 	@Valid
 	private CpfCommandDto cpf;
 	
-	String turmaId;
-
 }
