@@ -17,13 +17,14 @@ public class ProfessorApplicationService {
 	public ProfessorId handle(final CriarProfessorCommand cmd) {
 		ProfessorId professorId = cmd.getId() != null ? cmd.getId() : ProfessorId.generate();
 
+		System.out.println("professor "+ cmd.getCpf().getNumero()+" "+ cmd.getEmail());
+
 		Professor professor = Professor.builder()
 				.id(ProfessorId.generate())
 				.nome(cmd.getNome())
 				.email(cmd.getEmail())
 				.cpf(cmd.getCpf())
 				.titulo(cmd.getTitulo())
-				.disciplinas(cmd.getDisciplinas())
 				.build();
 		
 		this.professorDomainRepository.insert(professor);

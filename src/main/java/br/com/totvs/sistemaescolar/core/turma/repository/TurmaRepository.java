@@ -1,7 +1,10 @@
 package br.com.totvs.sistemaescolar.core.turma.repository;
 
+import java.sql.Types;
+
 import javax.persistence.EntityManager;
 
+import org.springframework.jdbc.core.SqlParameterValue;
 import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,5 +24,11 @@ public class TurmaRepository extends CrudAggregateRepository<Turma, String> impl
 	protected String getTableName() {
 		return "turma";
 	}
+
+	@Override
+	public boolean checkIfExistsByDescricao(String descricao) {
+		return this.exists("data->'descricao'= ?", new SqlParameterValue(Types.VARCHAR, descricao));
+	}
+
 
 }

@@ -1,6 +1,7 @@
 package br.com.totvs.sistemaescolar.core.aluno.repository;
 
 import java.sql.Types;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
@@ -27,6 +28,11 @@ public class AlunoRepository extends CrudAggregateRepository<Aluno, String> impl
 	
 	public boolean checkIfExistsByCpf(String cpf) {
 		System.out.println("CPF "+ cpf);
-		return this.exists("data->'cpf'->>'numero' = ?", new SqlParameterValue(Types.VARCHAR, cpf));
+		return this.exists("data->'cpf'->>'numero' = ?","09393481954");
 	}
+	
+	public Optional<Aluno> getByCpf(String cpf) {
+		return this.findOne("data->'cpf'->>'numero' = ?", new SqlParameterValue(Types.VARCHAR, cpf));
+	}
+
 }

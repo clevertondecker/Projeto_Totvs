@@ -35,6 +35,5 @@ public class CriarAlunoCommandDto {
 	@Valid
 	private CpfCommandDto cpf;
 
-	private List<TurmaId> turmaId;
 
 }

@@ -35,15 +35,12 @@ public class TurmaController {
 	@Autowired
 	private ValidatorService validator;
 
-//	 private static final Logger log =
-//	 LoggerFactory.getLogger(UserCommandService.class);
-
 	@ApiOperation(value = "API para adicionar uma turma", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Turma criada."), })
 
 	@PostMapping
 	@RequestMapping("adicionar")
-	public ResponseEntity<Void> adicionarTurma(@Valid @RequestBody CriarTurmaCommandDto turmaDto,
+	public ResponseEntity<Void> adicionar(@Valid @RequestBody CriarTurmaCommandDto turmaDto,
 			BindingResult result) {
 
 		validator.validate(turmaDto).ifPresent( violations -> { 

@@ -50,8 +50,7 @@ public class ProfessorController {
 				professorDto.getNome(), 
 				professorDto.getEmail(),
 				CPF.of(professorDto.getCpf().getNumero()), 
-				professorDto.getTitulo(), 
-				professorDto.getDisciplinasId());
+				professorDto.getTitulo());
 
 		ProfessorId id = service.handle(cmd);
 

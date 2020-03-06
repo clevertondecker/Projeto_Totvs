@@ -17,11 +17,9 @@ public class CriarProfessorCommand {
 	private final CPF cpf;
 	private final Titulacao titulo;
 	
-	public final List<DisciplinaId> disciplinas;
 
-	public static CriarProfessorCommand of(String nome, String email, CPF cpf, Titulacao titulo,
-			List<DisciplinaId> disciplinas) {
-		return new CriarProfessorCommand(null, nome, email, cpf, titulo,disciplinas);
+	public static CriarProfessorCommand of(String nome, String email, CPF cpf, Titulacao titulo) {
+		return new CriarProfessorCommand(null, nome, email, cpf, titulo);
 	}
 
 }

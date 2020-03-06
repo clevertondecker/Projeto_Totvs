@@ -11,7 +11,7 @@ public class VerificaCpfDuplicadoException extends RuntimeException {
 	@ApiErrorParameter
 	private final String cpf;
 
-	public VerificaCpfDuplicadoException(String cfp) {
-		this.cpf = cfp;
+	public VerificaCpfDuplicadoException(String cpf) {
+		this.cpf = cpf;
 	}
 }

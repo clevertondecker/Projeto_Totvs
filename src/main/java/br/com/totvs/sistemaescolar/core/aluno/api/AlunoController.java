@@ -36,9 +36,6 @@ public class AlunoController {
 	@Autowired
 	private ValidatorService validator;
 
-//	 private static final Logger log =
-//	 LoggerFactory.getLogger(UserCommandService.class);
-
 	@ApiOperation(value = "API para adicionar um aluno", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Aluno criado."), })
 
@@ -57,8 +54,7 @@ public class AlunoController {
 				alunoDto.getEmail(),
 				CPF.of(alunoDto.getCpf().getNumero()),
 				alunoDto.getFormaIngresso(),
-				alunoDto.getMatricula(),
-				alunoDto.getTurmaId());
+				alunoDto.getMatricula());
 		
 		AlunoId id = service.handle(cmd);
 			
@@ -70,5 +66,8 @@ public class AlunoController {
 				.build().toUri())
 				.build();
 	}
+
+
+	
 
 }
