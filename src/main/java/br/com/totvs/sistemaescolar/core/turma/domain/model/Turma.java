@@ -43,5 +43,9 @@ public class Turma {
 		if(disciplinaId !=null)
 		this.disciplinas.addAll(disciplinaId);
 	}
+	
+	public void adicionarAluno(AlunoId alunoId) {
+		alunos.add(alunoId);
+	}
 
 }
