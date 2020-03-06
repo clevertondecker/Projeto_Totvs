@@ -35,47 +35,32 @@ public class AlunoApplicationService {
 //		if (this.alunoRepository.checkIfExistsByCpf(cmd.getCpf().getNumero())) {
 //		throw new VerificaCpfDuplicadoException(cmd.getCpf().getNumero());
 //	}
-		Aluno aluno = new Aluno();
 		
-		/*Cria aluno sem turma */
-		if(cmd.getTurmaId() == null) {
-		 aluno = Aluno.builder()
+		/*Cria aluno sem adicionar em nenhuma turma*/
+		 Aluno aluno = Aluno.builder()
 				.id(alunoId).nome(cmd.getNome())
 				.email(cmd.getEmail())
 				.cpf(cmd.getCpf())
 				.formaIngresso(cmd.getFormaIngresso())
 				.matricula(cmd.getMatricula())
 				.build();
-		 System.out.println("Sem turma");
-		}
-		
-		/*Cria aluno com turma */
-		if(cmd.getTurmaId() !=null) {
-			 aluno = Aluno.builder()
-					.id(alunoId)
-					.nome(cmd.getNome())
-					.email(cmd.getEmail())
-					.cpf(cmd.getCpf())
-					.formaIngresso(cmd.getFormaIngresso())
-					.matricula(cmd.getMatricula())
-					.build();
-			 			 	
-			 	//Recupera turma do banco
+		 		
+		 		System.out.println("Sem turma");
+	 			 	
+			 	//Recupera turma do banco de dados e adicionar o aluno.
 				Optional<Turma> optionalTurma = turmaRepository.getByTurmaId(cmd.getTurmaId());
+				System.out.println("COM TURMA");
 				optionalTurma.ifPresent(turma -> {
+					System.out.println("Presente");
 					turma.adicionarAluno(alunoId);
 					turmaRepository.update(turma);
 				});
-		}
 		
 		this.alunoRepository.insert(aluno);
 		return aluno.getId();
 
 	}
 
-//		System.out.println("Entrou add turma: " + turmaId);
-//
-
-//		
+	
 
 }
