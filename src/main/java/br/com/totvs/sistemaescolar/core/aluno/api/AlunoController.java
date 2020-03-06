@@ -2,8 +2,6 @@ package br.com.totvs.sistemaescolar.core.aluno.api;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +18,8 @@ import com.totvs.tjf.core.validation.ValidatorService;
 
 import br.com.totvs.sistemaescolar.core.aluno.application.AlunoApplicationService;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
-import br.com.totvs.sistemaescolar.core.aluno.exception.CriarAlunoException;
+import br.com.totvs.sistemaescolar.core.aluno.exception.AlunoJaExisteException;
 import br.com.totvs.sistemaescolar.core.pessoa.domain.model.CPF;
-import br.com.totvs.sistemaescolar.core.turma.domain.model.Turma;
-import br.com.totvs.sistemaescolar.core.turma.domain.model.TurmaDomainRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -37,10 +33,7 @@ public class AlunoController {
 	
 	@Autowired
 	private AlunoApplicationService service;
-	
-	@Autowired
-	private TurmaDomainRepository turmaRepository;
-	
+		
 	@Autowired
 	private ValidatorService validator;
 
@@ -48,12 +41,12 @@ public class AlunoController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Aluno criado."), })
 
 	@PostMapping
-	@RequestMapping("adicionar")
-	public ResponseEntity<Void> adicionarAluno(@Valid @RequestBody CriarAlunoCommandDto alunoDto,
+	@RequestMapping(value = {"adicionar", "adicionar/{turmaId}"})
+	public ResponseEntity<Void> adicionarAluno(@PathVariable(required = false) String turmaId ,@Valid @RequestBody CriarAlunoCommandDto alunoDto,
 			BindingResult result) {
 
 		validator.validate(alunoDto).ifPresent( violations -> { 
-			throw new CriarAlunoException(violations); 
+			throw new AlunoJaExisteException(violations); 
 		});
 			
 		var cmd = CriarAlunoCommand.of(
@@ -62,7 +55,8 @@ public class AlunoController {
 				alunoDto.getEmail(),
 				CPF.of(alunoDto.getCpf().getNumero()),
 				alunoDto.getFormaIngresso(),
-				alunoDto.getMatricula());
+				alunoDto.getMatricula(),
+				alunoDto.getTurmaId());
 		
 		AlunoId id = service.handle(cmd);
 			
@@ -73,20 +67,6 @@ public class AlunoController {
 				.path(id.toString())
 				.build().toUri())
 				.build();
-	}
-	
-	@PostMapping
-	@RequestMapping("adicionarTurma/{turmaId}")
-	public ResponseEntity<Void> adicionarTurma(@PathVariable String turmaId, @Valid @RequestBody CriarAlunoCommandDto alunoDto,
-			BindingResult result) {
-		
-			System.out.println("Entrou add turma: "+ turmaId);
-			Optional<Turma> turma = turmaRepository.getByTurmaId(turmaId);
-			System.out.println(turma.get().getDescricao());
-			return null;
-	}
-
-
-	
+	}	
 
 }

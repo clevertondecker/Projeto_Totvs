@@ -16,10 +16,11 @@ public final class CriarAlunoCommand {
 	private final CPF cpf;
 	private final formaDeIngresso formaIngresso;
 	private final Long matricula;
+	private final String turmaId;
 
 	public static CriarAlunoCommand of(String nome, String email, CPF cpf, formaDeIngresso formaIngresso,
-			long matricula) {
-		return new CriarAlunoCommand(null, nome, email, cpf, formaIngresso, matricula);
+			long matricula, String turmaId) {
+		return new CriarAlunoCommand(null, nome, email, cpf, formaIngresso, matricula, turmaId);
 	}
 
 }

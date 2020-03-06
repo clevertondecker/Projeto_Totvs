@@ -34,6 +34,7 @@ public class CriarAlunoCommandDto {
 
 	@Valid
 	private CpfCommandDto cpf;
-
+	
+	String turmaId;
 
 }

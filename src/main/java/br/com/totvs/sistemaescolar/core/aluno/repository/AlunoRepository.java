@@ -27,8 +27,7 @@ public class AlunoRepository extends CrudAggregateRepository<Aluno, String> impl
 	}
 	
 	public boolean checkIfExistsByCpf(String cpf) {
-		System.out.println("CPF "+ cpf);
-		return this.exists("data->'cpf'->>'numero' = ?","09393481954");
+		return this.exists("data->'cpf'->>'numero' = ?", cpf);
 	}
 	
 	public Optional<Aluno> getByCpf(String cpf) {

@@ -9,11 +9,11 @@ import com.totvs.tjf.core.stereotype.AggregateIdentifier;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
 import br.com.totvs.sistemaescolar.core.disciplina.domain.model.DisciplinaId;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-@Getter
+@Data
 @NoArgsConstructor
 @Aggregate
 public class Turma {
