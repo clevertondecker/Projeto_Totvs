@@ -2,11 +2,14 @@ package br.com.totvs.sistemaescolar.core.aluno.api;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +22,8 @@ import br.com.totvs.sistemaescolar.core.aluno.application.AlunoApplicationServic
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
 import br.com.totvs.sistemaescolar.core.aluno.exception.CriarAlunoException;
 import br.com.totvs.sistemaescolar.core.pessoa.domain.model.CPF;
+import br.com.totvs.sistemaescolar.core.turma.domain.model.Turma;
+import br.com.totvs.sistemaescolar.core.turma.domain.model.TurmaDomainRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -32,7 +37,10 @@ public class AlunoController {
 	
 	@Autowired
 	private AlunoApplicationService service;
-
+	
+	@Autowired
+	private TurmaDomainRepository turmaRepository;
+	
 	@Autowired
 	private ValidatorService validator;
 
@@ -65,6 +73,17 @@ public class AlunoController {
 				.path(id.toString())
 				.build().toUri())
 				.build();
+	}
+	
+	@PostMapping
+	@RequestMapping("adicionarTurma/{turmaId}")
+	public ResponseEntity<Void> adicionarTurma(@PathVariable String turmaId, @Valid @RequestBody CriarAlunoCommandDto alunoDto,
+			BindingResult result) {
+		
+			System.out.println("Entrou add turma: "+ turmaId);
+			Optional<Turma> turma = turmaRepository.getByTurmaId(turmaId);
+			System.out.println(turma.get().getDescricao());
+			return null;
 	}
 
 

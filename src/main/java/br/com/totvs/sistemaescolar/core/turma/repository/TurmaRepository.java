@@ -1,6 +1,7 @@
 package br.com.totvs.sistemaescolar.core.turma.repository;
 
 import java.sql.Types;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
@@ -29,6 +30,12 @@ public class TurmaRepository extends CrudAggregateRepository<Turma, String> impl
 	public boolean checkIfExistsByDescricao(String descricao) {
 		return this.exists("data->'descricao'= ?", new SqlParameterValue(Types.VARCHAR, descricao));
 	}
+	
+	public Optional<Turma> getByTurmaId(String turmaId) {
+		return this.findOne("data->'id'->>'id' = ?", new SqlParameterValue(Types.VARCHAR, turmaId));
+	}
+
+
 
 
 }
