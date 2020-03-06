@@ -1,6 +1,5 @@
 package br.com.totvs.sistemaescolar.core.aluno.application;
 
-
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -22,20 +21,20 @@ public class AlunoApplicationService {
 
 	@Autowired
 	AlunoRepository alunoRepository;
-	
+
 	@Autowired
 	TurmaRepository turmaRepository;
 
 	public AlunoId handle(final CriarAlunoCommand cmd) {
 		AlunoId alunoId = cmd.getId() != null ? cmd.getId() : AlunoId.generate();
 
-		/* Valida CPF , comentado para testes*/
+		/* Valida CPF , comentado para testes */
 //		if (this.alunoRepository.checkIfExistsByCpf(cmd.getCpf().getNumero())) {
 //		throw new VerificaCpfDuplicadoException(cmd.getCpf().getNumero());
 //	}
-		
-		/*Cria aluno sem adicionar em nenhuma turma*/
-		 Aluno aluno = Aluno.builder()
+
+		/* Cria aluno sem adicionar em nenhuma turma */
+		Aluno aluno = Aluno.builder()
 				.id(alunoId)
 				.nome(cmd.getNome())
 				.email(cmd.getEmail())
@@ -43,23 +42,21 @@ public class AlunoApplicationService {
 				.formaIngresso(cmd.getFormaIngresso())
 				.matricula(cmd.getMatricula())
 				.build();
-		 			 			 	
-			 	//Recupera turma do banco de dados e adicionar o aluno.
-				if(cmd.getTurmaId()!=null) {
-		 		Optional<Turma> optionalTurma = turmaRepository.getByTurmaId(cmd.getTurmaId().toString());
 
-		 		optionalTurma.ifPresent(turma -> {
-					System.out.println("Presente");
-					turma.adicionarAluno(alunoId);
-					turmaRepository.update(turma);
-				});
-				}
-				
+		/* Recupera a turma do banco de dados para adicionar o novo aluno. */
+		if (cmd.getTurmaId() != null) {
+			Optional<Turma> optionalTurma = turmaRepository.getByTurmaId(cmd.getTurmaId().toString());
+
+			optionalTurma.ifPresent(turma -> {
+				System.out.println("Presente");
+				turma.adicionarAluno(alunoId);
+				turmaRepository.update(turma);
+			});
+		}
+
 		this.alunoRepository.insert(aluno);
 		return aluno.getId();
 
 	}
-
-	
 
 }

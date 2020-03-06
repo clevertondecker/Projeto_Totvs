@@ -36,11 +36,11 @@ public class AlunoController {
 	@Autowired
 	private ValidatorService validator;
 
-	@ApiOperation(value = "API para adicionar um aluno já com uma turma, ou sem turma", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "API para adicionar um aluno, também permite adicionar um aluno já vinculada a uma turma", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Aluno criado."), })
 
 	@PostMapping
-	@RequestMapping(value = {"adicionar", "adicionar/{turmaId}"})
+	@RequestMapping(value = "adicionar")
 	public ResponseEntity<Void> adicionarAluno(@Valid @RequestBody CriarAlunoCommandDto alunoDto,
 			BindingResult result) {
 

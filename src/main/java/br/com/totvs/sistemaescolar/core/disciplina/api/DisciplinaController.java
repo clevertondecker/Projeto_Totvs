@@ -38,7 +38,7 @@ public class DisciplinaController {
 //	 private static final Logger log =
 //	 LoggerFactory.getLogger(UserCommandService.class);
 
-	@ApiOperation(value = "API para adicionar uma disciplina", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "API para adicionar uma disciplina, também permite adicionar a disciplina já vinculada a uma turma", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Disciplina criada."), })
 
 	@PostMapping

@@ -31,7 +31,6 @@ public class Aluno extends Pessoa {
 		this.id = id;
 		this.matricula = matricula;
 		this.formaIngresso = formaIngresso;
-		
 	}
 
 }

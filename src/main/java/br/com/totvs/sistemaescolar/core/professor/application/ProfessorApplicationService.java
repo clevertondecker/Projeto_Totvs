@@ -37,7 +37,7 @@ public class ProfessorApplicationService {
 				.titulo(cmd.getTitulo())
 				.build();
 		
-		//Recupera turma do banco de dados e adicionar o aluno.
+		/*Recupera a disciplina do banco de dados e adicionar o professor nela.*/
 		if(cmd.getDisciplinaId()!=null) {
  		Optional<Disciplina> optionalDisciplina = disciplinaRepository.getByDisciplinaId(cmd.getDisciplinaId().toString());
 		System.out.println("Entrou");
@@ -50,6 +50,6 @@ public class ProfessorApplicationService {
 		
 		this.professorRepository.insert(professor);
 		return professor.getId();
-
 	}
+	
 }
