@@ -42,7 +42,7 @@ public class AlunoController {
 
 	@PostMapping
 	@RequestMapping(value = {"adicionar", "adicionar/{turmaId}"})
-	public ResponseEntity<Void> adicionarAluno(@PathVariable(required = false) String turmaId ,@Valid @RequestBody CriarAlunoCommandDto alunoDto,
+	public ResponseEntity<Void> adicionarAluno(@Valid @RequestBody CriarAlunoCommandDto alunoDto,
 			BindingResult result) {
 
 		validator.validate(alunoDto).ifPresent( violations -> { 
@@ -56,7 +56,7 @@ public class AlunoController {
 				CPF.of(alunoDto.getCpf().getNumero()),
 				alunoDto.getFormaIngresso(),
 				alunoDto.getMatricula(),
-				turmaId);
+				alunoDto.getTurmaId());
 		
 		AlunoId id = service.handle(cmd);
 			

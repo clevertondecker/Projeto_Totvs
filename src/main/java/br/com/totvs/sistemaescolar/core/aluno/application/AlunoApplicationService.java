@@ -8,9 +8,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.totvs.sl.yms.core.porteiro.domain.model.Porteiro;
-import com.totvs.sl.yms.core.porteiro.domain.model.PorteiroId;
-
 import br.com.totvs.sistemaescolar.core.aluno.api.CriarAlunoCommand;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.Aluno;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
@@ -48,7 +45,7 @@ public class AlunoApplicationService {
 		 		System.out.println("Sem turma");
 	 			 	
 			 	//Recupera turma do banco de dados e adicionar o aluno.
-				Optional<Turma> optionalTurma = turmaRepository.getByTurmaId(cmd.getTurmaId());
+				Optional<Turma> optionalTurma = turmaRepository.getByTurmaId(cmd.getTurmaId().toString());
 				System.out.println("COM TURMA");
 				optionalTurma.ifPresent(turma -> {
 					System.out.println("Presente");
