@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.totvs.tjf</groupId>
     <artifactId>tjf-boot-starter</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.14.0-RELEASE</version>
   </parent>
   <groupId>br.com.sistemaEscola</groupId>
   <artifactId>Totvs</artifactId>
@@ -16,19 +16,19 @@
     <dependency>
       <groupId>com.totvs.tjf</groupId>
       <artifactId>tjf-repository-aggregate</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.14.0-RELEASE</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.totvs.tjf</groupId>
       <artifactId>tjf-core-validation</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.14.0-RELEASE</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.totvs.tjf</groupId>
       <artifactId>tjf-api-context</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.14.0-RELEASE</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -96,13 +96,13 @@
     <dependency>
       <groupId>com.totvs.tjf</groupId>
       <artifactId>tjf-core-common</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.14.0-RELEASE</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.totvs.tjf</groupId>
       <artifactId>tjf-i18n-core</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.14.0-RELEASE</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

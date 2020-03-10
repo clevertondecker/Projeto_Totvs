@@ -27,7 +27,7 @@ public class TurmaId {
 	public static TurmaId fromString(String value) {
 		return new TurmaId(UUID.fromString(value));
 	}
-
+	
 	@Override
 	public String toString() {
 		return id.toString();

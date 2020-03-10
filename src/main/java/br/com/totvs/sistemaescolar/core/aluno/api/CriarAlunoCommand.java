@@ -23,5 +23,10 @@ public final class CriarAlunoCommand {
 			long matricula, TurmaId turmaId) {
 		return new CriarAlunoCommand(null, nome, email, cpf, formaIngresso, matricula, turmaId);
 	}
+	
+	public static CriarAlunoCommand fromIntegration(AlunoId id,String nome, String email, CPF cpf, formaDeIngresso formaIngresso,
+			long matricula, TurmaId turmaId) {
+		return new CriarAlunoCommand(id, nome, email, cpf, formaIngresso, matricula, turmaId);
+	}
 
 }
