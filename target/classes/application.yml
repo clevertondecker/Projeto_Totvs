@@ -1,0 +1,373 @@
+
+
+#spring.datasource.url=jdbc:postgresql://localhost:5432/sistema_escolar-core?user=postgres&password=132567
+##spring.jpa.hibernate.ddl-auto = update
+#
+##configurar conexao
+#spring.jpa.properties.hibernate.show.sql=true
+#spring.jpa.properties.hibernate.use_sql_comments=true
+#spring.jpa.properties.hibernate.format_sql=true
+#spring.jpa.properties.hibernate.type=trace
+#spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation = true
+#spring.jpa.show-sql=true
+#spring.jpa.properties.hibernate.show_sql=true
+#logging.level.org.hibernate.type=trace
+#logging.level.org.hibernate.SQL=DEBUG
+
+
+
+
+
+# https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html#common-application-properties
+management:
+  server:
+     port: 8180
+     servlet:
+        context-path: /
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: false
+    metrics:
+      enabled: false
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      path-mapping:
+        prometheus: metrics
+      base-path: /_/
+      exposure:
+        include: "*"
+
+# 
+# Configuracao padrao
+#
+
+spring:
+
+  profiles:
+    active:
+    - prod
+
+  application:
+    name: sistema_escolar-core
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/sistema_escolar-core
+    username: postgres
+    password: 132567
+  
+  flyway:
+    enabled: true
+    migrate: true
+    locations: classpath:db/migration
+    # Only TOTVS Tenant (94d73469-6861-46a8-96b3-1abf272e3983)
+    schemas: public
+    baselineOnMigrate: true
+    
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    hibernate:
+      naming:
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    properties:      
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true # https://github.com/spring-projects/spring-boot/issues/12007
+        hbm2ddl:
+          auto: "none"
+        show_sql: false
+        format_sql: false
+       
+  cloud:
+    stream:
+      defaultBinder: rabbit1
+      bindings:
+        rac-input:
+          destination: RAC.Outgoing
+          group: sistema_escolar-core
+          binder: rabbit2
+        yms-input-events:       
+          destination: sistema_escolar-exchange
+          group: sistema_escolar-core
+          binder: rabbit1
+        yms-output-events:
+          destination: sistema_escolar-exchange
+          binder: rabbit1
+        logistica-input-events:      
+          destination: sistema_escolar-exchange
+          group: sistema_escolar
+        logistica-output-events:
+          destination: sistema_escolar-exchange  
+        tjf-messaging-error-input:
+          destination: sistema_escolar-core-errors
+          group: sistema_escolar-core-errors
+        tjf-messaging-error-output:
+          destination: sistema_escolar-core-errors
+          group: sistema_escolar-core-errors
+          producer:
+            requiredGroups: sistema_escolar-core-errors
+      rabbit:
+        bindings:
+          rac-input:
+            consumer:
+              exchange-type: fanout
+      binders:
+        rabbit1:
+          type: rabbit
+          defaultCandidate: false
+          inheritEnvironment: false
+          environment:
+            spring:
+              rabbitmq:
+                host: ${MQ-HOST}
+                port: 5672
+                username: ${MQ-USR}
+                password: ${MQ-PWD}
+                connection-timeout: 10000
+                virtualHost: ${MQ-VHOST}
+        rabbit2:
+          type: rabbit
+          defaultCandidate: false
+          inheritEnvironment: false
+          environment:
+            spring:
+              rabbitmq:
+                host: ${MQ-RAC-HOST}
+                port: 5672
+                username: ${MQ-RAC-USR}
+                password: ${MQ-RAC-PWD}
+                connection-timeout: 10000
+                virtualHost: /
+               
+#security:
+#  access:
+#    api:
+#      permissions-uri: https://admin.rac.dev.totvs.io/totvs.rac/api/permissions
+#  oauth2:    
+#    resource:
+#      id: 'authorization_api'
+#      jwk:
+#        key-set-uri: https://totvs.rac.dev.totvs.io/totvs.rac/.well-known/openid-configuration/jwks
+
+#yms:
+#  swagger:
+#    enabled: true
+#    host: https://totvs.logistica.totvs.app/yms/core
+#    oauth2:
+#      client-id: yms_swagger
+#      client-secret: totvs@123
+#      auth-server: https://totvs.rac.dev.totvs.io/totvs.rac
+         
+---
+# 
+# Perfil para testes locais
+#
+
+spring:
+
+  profiles: local
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sistema_escolar-core
+    username: postgres
+    password: 132567
+ 
+  flyway:
+    # Only TOTVS Tenant (94d73469-6861-46a8-96b3-1abf272e3983)
+    schemas: public
+
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    properties:      
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+  cloud:
+    stream:
+      binders:
+        rabbit1:
+          type: rabbit
+          defaultCandidate: false
+          inheritEnvironment: false
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+                virtualHost: /
+        rabbit2:
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+                virtualHost: /
+server:
+  port: 8280
+
+---
+
+# 
+# Perfil para testes
+#
+
+spring:
+
+  profiles: test
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sistema_escolar
+    username: postgres
+    password: 132567
+
+  flyway:
+    # Only TOTVS Tenant (94d73469-6861-46a8-96b3-1abf272e3983)
+    schemas: public
+
+  cloud:
+    stream:
+      binders:
+        rabbit1:
+          type: rabbit
+          defaultCandidate: false
+          inheritEnvironment: false
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+                virtualHost: /
+        rabbit2:
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+                virtualHost: /
+         
+#security:
+#  access:
+#    api:
+#      permissions-uri: http://admin.rac.totvs.com.br/totvs.rac/api/permissions
+#  oauth2:    
+#    resource:
+#      id: 'authorization_api'
+#      jwk:
+#        key-set-uri: http://admin.rac.totvs.com.br/totvs.rac/.well-known/openid-configuration/jwks
+
+---
+# 
+# Profile to production
+#
+
+spring:
+  profiles: prod
+
+#server:
+#  servlet:
+#    context-path: /yms/core 
+
+---
+# 
+# Perfil desenvolvimento
+#
+
+spring:
+
+  profiles: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sistema_escolar-dev
+    username: postgres
+    password: 132567
+    
+  flyway:
+    enabled: true
+    migrate: true
+    locations: classpath:db/migration
+    # Only TOTVS Tenant (94d73469-6861-46a8-96b3-1abf272e3983)
+    schemas: b56efb27-13bb-4767-8227-77abd3761023
+    baselineOnMigrate: true  
+
+  jpa:
+    show-sql: true
+    properties:      
+      hibernate:
+        format_sql: true
+        show_sql: true
+        hbm2ddl:
+          auto: "none"
+
+  cloud:
+    stream:
+      default-binder: rabbit1
+      bindings:
+        rac-input:
+          destination: local-RAC.Outgoing
+          group: core
+          binder: rabbit2
+        yms-input-events:       
+          destination: sistema_escolar-exchange
+          group: sistema_escolar-core
+          binder: rabbit1
+        yms-output-events:
+          destination: sistema_escolar-exchange
+          binder: rabbit2
+        logistica-input-events:      
+          destination: sistema_escolar-exchange
+          group: sistema_escolar
+        logistica-output-events:
+          destination: sistema_escolar-exchange  
+        tjf-messaging-error-output:
+          destination: sistema_escolar-exchange
+          group: errors
+          producer:
+            requiredGroups: errors  
+      rabbit:
+        bindings:
+          rac-input:
+            consumer:
+              exchange-type: fanout
+      binders:
+        rabbit1:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+                virtualHost: /
+        rabbit2:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+                virtualHost: /
+management:
+  server:
+    port: 8185
+
+server:
+  port: 8280
