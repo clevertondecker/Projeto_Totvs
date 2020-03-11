@@ -8,6 +8,7 @@ import com.totvs.tjf.core.stereotype.AggregateIdentifier;
 import br.com.totvs.sistemaescolar.core.aluno.enums.formaDeIngresso;
 import br.com.totvs.sistemaescolar.core.pessoa.domain.model.CPF;
 import br.com.totvs.sistemaescolar.core.pessoa.domain.model.Pessoa;
+import br.com.totvs.sistemaescolar.core.turma.domain.model.TurmaId;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class Aluno extends Pessoa {
 	private AlunoId id;
 	private Long matricula;
 	private formaDeIngresso formaIngresso;
+	private TurmaId turmaid;
 	
 
 	@Builder

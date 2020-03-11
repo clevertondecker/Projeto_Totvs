@@ -13,10 +13,10 @@ public class SistemaEscolaPublisher {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SistemaEscolaPublisher.class);
 	
-	private SistemaEscolaExchangeOutput logisticaExchangeOutput;
+	private SistemaEscolaExchangeOutput sistemaEscolaExchangeOutput;
 	
 	public SistemaEscolaPublisher(SistemaEscolaExchangeOutput logisticaExchangeOutput) {
-		this.logisticaExchangeOutput = logisticaExchangeOutput;
+		this.sistemaEscolaExchangeOutput = logisticaExchangeOutput;
 	}
 	
 	public <T> void publish(T event) {
@@ -26,10 +26,10 @@ public class SistemaEscolaPublisher {
 			field = event.getClass().getField("NAME");
 			eventName = (String) field.get(event);
 			
-			new TOTVSMessage<T>(eventName, event).sendTo(logisticaExchangeOutput.outputEvent());
+			new TOTVSMessage<T>(eventName, event).sendTo(sistemaEscolaExchangeOutput.outputEvent());
 			
 		} catch (Exception e) {
-			LOG.debug("Exchange: {}\nTopic: {}\n", logisticaExchangeOutput, eventName);
+			LOG.debug("Exchange: {}\nTopic: {}\n", sistemaEscolaExchangeOutput, eventName);
 		}		
 	}
 }
