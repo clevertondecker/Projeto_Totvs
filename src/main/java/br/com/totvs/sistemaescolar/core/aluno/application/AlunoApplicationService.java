@@ -37,7 +37,7 @@ public class AlunoApplicationService {
 //		throw new VerificaCpfDuplicadoException(cmd.getCpf().getNumero());
 //	}
 
-		/* Cria aluno sem adicionar em nenhuma turma */
+		/* Cria aluno sem adicionar em nenhuma turma */		
 		Aluno aluno = Aluno.builder().id(alunoId)
 				.nome(cmd.getNome())
 				.email(cmd.getEmail())
@@ -63,12 +63,12 @@ public class AlunoApplicationService {
 				.id(aluno.getId().toString())
 				.nome(aluno.getNome())
 				.email(aluno.getEmail())
-				.cpf(aluno.getCpf().toString())
+				.cpf(aluno.getCpf().getNumero())
 				.matricula(aluno.getMatricula().toString())
 				.formaIngresso(aluno.getFormaIngresso().toString())
 				.turmaId(cmd.getTurmaId().toString())
 				.build());
-				
+
 		return aluno.getId();
 
 	}
