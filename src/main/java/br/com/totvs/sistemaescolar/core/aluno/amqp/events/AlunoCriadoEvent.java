@@ -25,23 +25,23 @@ public final class AlunoCriadoEvent {
 	private String id;
 
 	@NotBlank(message = "{AlunoCriadoEvent.nome.NotBlank}")
-	@Size(min = 3, max = 100, message = "{AjudanteCriadoEvent.nome.Size}")
+	@Size(min = 3, max = 100, message = "{AlunoCriadoEvent.nome.Size}")
 	private String nome;
 
 	@NotBlank(message = "{AlunoCriadoEvent.email.NotBlank}")
-	@Size(min = 3, max = 100, message = "{AjudanteCriadoEvent.email.Size}")
+	@Size(min = 3, max = 100, message = "{AlunoCriadoEvent.email.Size}")
 	private String email;
 	
 	@NotBlank(message = "{AlunoCriadoEvent.cpf.NotBlank}")
-	@Size(min = 11, max = 11, message = "{AjudanteCriadoEvent.cpf.Size}")
+	@Size(min = 11, max = 11, message = "{AlunoCriadoEvent.cpf.Size}")
 	private String cpf;
 
 	@NotBlank(message = "{AlunoCriadoEvent.matricula.NotBlank}")
-	@Size(min = 1, max = 0, message = "{AjudanteCriadoEvent.matricula.Size}")
+	@Size(min = 1, max = 0, message = "{AlunoCriadoEvent.matricula.Size}")
 	private String matricula;
 	
 	@NotBlank(message = "{AlunoCriadoEvent.formaIngresso.NotBlank}")
-	@Size(min = 1, max = 10, message = "{AjudanteCriadoEvent.formaIngresso.Size}")
+	@Size(min = 1, max = 10, message = "{AlunoCriadoEvent.formaIngresso.Size}")
 	private String formaIngresso;
 	
 	private String turmaId;
