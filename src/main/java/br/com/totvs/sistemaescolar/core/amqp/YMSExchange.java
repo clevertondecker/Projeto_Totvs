@@ -3,11 +3,11 @@ package br.com.totvs.sistemaescolar.core.amqp;
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 
-public interface Sistema_escolarExchange {
+public interface YMSExchange {
 
-	public static final String OUTPUT = "sistema_escolar-output-events";
+	public static final String OUTPUT = "yms-output-events";
 	
-	@Output(Sistema_escolarExchange.OUTPUT)
+	@Output(YMSExchange.OUTPUT)
 	MessageChannel outputEvent();
 	
 }

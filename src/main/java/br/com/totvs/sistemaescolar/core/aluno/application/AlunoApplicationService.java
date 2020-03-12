@@ -12,7 +12,7 @@ import br.com.totvs.sistemaescolar.core.aluno.api.CriarAlunoCommand;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.Aluno;
 import br.com.totvs.sistemaescolar.core.aluno.domain.model.AlunoId;
 import br.com.totvs.sistemaescolar.core.aluno.repository.AlunoRepository;
-import br.com.totvs.sistemaescolar.core.amqp.SistemaEscolaPublisher;
+import br.com.totvs.sistemaescolar.core.amqp.YMSPublisher;
 import br.com.totvs.sistemaescolar.core.turma.domain.model.Turma;
 import br.com.totvs.sistemaescolar.core.turma.repository.TurmaRepository;
 
@@ -27,7 +27,7 @@ public class AlunoApplicationService {
 	TurmaRepository turmaRepository;
 
 	@Autowired
-	private SistemaEscolaPublisher sistemaEscolaPublisher;
+	private YMSPublisher sistemaEscolaPublisher;
 
 	public AlunoId handle(final CriarAlunoCommand cmd) {
 		AlunoId alunoId = cmd.getId() != null ? cmd.getId() : AlunoId.generate();
@@ -38,15 +38,19 @@ public class AlunoApplicationService {
 //	}
 
 		/* Cria aluno sem adicionar em nenhuma turma */
-		Aluno aluno = Aluno.builder().id(alunoId).nome(cmd.getNome()).email(cmd.getEmail()).cpf(cmd.getCpf())
-				.formaIngresso(cmd.getFormaIngresso()).matricula(cmd.getMatricula()).build();
+		Aluno aluno = Aluno.builder().id(alunoId)
+				.nome(cmd.getNome())
+				.email(cmd.getEmail())
+				.cpf(cmd.getCpf())
+				.formaIngresso(cmd.getFormaIngresso())
+				.matricula(cmd.getMatricula())
+				.build();
 
 		/* Recupera a turma do banco de dados para adicionar o novo aluno. */
 		if (cmd.getTurmaId() != null) {
 			Optional<Turma> optionalTurma = turmaRepository.getByTurmaId(cmd.getTurmaId().toString());
 			
 			optionalTurma.ifPresent(turma -> {
-				System.out.println("Presente");
 				turma.adicionarAluno(alunoId);
 				turmaRepository.update(turma);
 			});
@@ -64,7 +68,7 @@ public class AlunoApplicationService {
 				.formaIngresso(aluno.getFormaIngresso().toString())
 				.turmaId(cmd.getTurmaId().toString())
 				.build());
-		
+				
 		return aluno.getId();
 
 	}

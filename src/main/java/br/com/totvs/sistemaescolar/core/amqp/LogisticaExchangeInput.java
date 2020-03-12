@@ -3,10 +3,10 @@ package br.com.totvs.sistemaescolar.core.amqp;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;
 
-public interface SistemaEscolaExchangeInput {
+public interface LogisticaExchangeInput {
+
+	public static final String INPUT = "logistica-input-events";
 	
-	public static final String INPUT = "sistema_escolar-input-events";
-	
-	@Input(SistemaEscolaExchangeInput.INPUT)
+	@Input(LogisticaExchangeInput.INPUT)
 	SubscribableChannel inputEvent();
 }
