@@ -84,34 +84,35 @@ spring:
         show_sql: false
         format_sql: false
        
+
   cloud:
     stream:
       defaultBinder: rabbit1
       bindings:
         rac-input:
           destination: RAC.Outgoing
-          group: sistema_escolar-core
+          group: yms-core
           binder: rabbit2
         yms-input-events:       
-          destination: sistema_escolar-exchange
-          group: sistema_escolar-core
+          destination: yms-exchange
+          group: yms-core
           binder: rabbit1
         yms-output-events:
-          destination: sistema_escolar-exchange
+          destination: yms-exchange
           binder: rabbit1
         logistica-input-events:      
-          destination: sistema_escolar-exchange
-          group: sistema_escolar
+          destination: logistica-exchange
+          group: yms
         logistica-output-events:
-          destination: sistema_escolar-exchange  
+          destination: logistica-exchange  
         tjf-messaging-error-input:
-          destination: sistema_escolar-core-errors
-          group: sistema_escolar-core-errors
+          destination: yms-core-errors
+          group: yms-core-errors
         tjf-messaging-error-output:
-          destination: sistema_escolar-core-errors
-          group: sistema_escolar-core-errors
+          destination: yms-core-errors
+          group: yms-core-errors
           producer:
-            requiredGroups: sistema_escolar-core-errors
+            requiredGroups: yms-core-errors
       rabbit:
         bindings:
           rac-input:

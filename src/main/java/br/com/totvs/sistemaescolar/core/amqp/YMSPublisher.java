@@ -28,7 +28,6 @@ public class YMSPublisher {
 			field = event.getClass().getField("NAME");
 			eventName = (String) field.get(event);
 			
-			LOG.info("DEU BOA", event ,"event name", eventName);
 			new TOTVSMessage<T>(eventName, event).sendTo(ymsExchange.outputEvent());
 			
 		} catch (Exception e) {
