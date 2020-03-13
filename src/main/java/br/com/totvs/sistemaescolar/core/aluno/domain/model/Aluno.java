@@ -20,7 +20,7 @@ public class Aluno extends Pessoa {
 	private AlunoId id;
 	private Long matricula;
 	private formaDeIngresso formaIngresso;
-
+	
 	@Builder
 	public Aluno(@NonNull AlunoId id, String nome, String email, CPF cpf, Long matricula,
 			formaDeIngresso formaIngresso) {
@@ -28,7 +28,6 @@ public class Aluno extends Pessoa {
 		this.id = id;
 		this.matricula = matricula;
 		this.formaIngresso = formaIngresso;
-
 	}
 
 }

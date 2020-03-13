@@ -43,37 +43,31 @@ public class ProfessorApplicationService {
 				.cpf(cmd.getCpf())
 				.titulo(cmd.getTitulo())
 				.build();
-		System.out.println("entrou1"+ cmd.getDisciplinaId());
 	
 		/*Recupera a disciplina do banco de dados e adicionar o professor nela.*/
 		if(cmd.getDisciplinaId()!=null) {
 			System.out.println("entrou1.5");
 
- 		Optional<Disciplina> optionalDisciplina = disciplinaRepository.getByDisciplinaId(cmd.getDisciplinaId().toString());
- 		
- 		System.out.println(optionalDisciplina.get().getId());
- 		
+ 		Optional<Disciplina> optionalDisciplina = disciplinaRepository.getByDisciplinaId(cmd.getDisciplinaId().toString()); 		
  		optionalDisciplina.ifPresent(disciplina -> {
 
  			disciplina.adicionarProfessor(professorId);
 			disciplinaRepository.update(disciplina);
-			System.out.println("entrou2");
 
 		});
 		}
 		
 		this.professorRepository.insert(professor);
 		
-	
-//		/* Publica aluno no evento.*/
-//		sistemaEscolaPublisher.publish(ProfessorCriadoEvent.builder()
-//				.id(professor.getId().toString())
-//				.nome(professor.getNome())
-//				.email(professor.getEmail())
-//				.cpf(professor.getCpf().getNumero())
-//				.titulo(professor.getTitulo().toString())
-//				.disciplinaId(cmd.getDisciplinaId()!=null?cmd.getDisciplinaId().toString():"")
-//				.build());
+		/* Publica aluno no evento.*/
+		sistemaEscolaPublisher.publish(ProfessorCriadoEvent.builder()
+				.id(professor.getId().toString())
+				.nome(professor.getNome())
+				.email(professor.getEmail())
+				.cpf(professor.getCpf().getNumero())
+				.titulo(professor.getTitulo().toString())
+				.disciplinaId(cmd.getDisciplinaId()!=null?cmd.getDisciplinaId().toString():"")
+				.build());
 		
 		return professor.getId();
 	}
