@@ -44,8 +44,4 @@ public class Turma {
 		this.disciplinas.addAll(disciplinaId);
 	}
 	
-	public void adicionarAluno(AlunoId alunoId) {
-		alunos.add(alunoId);
-	}
-
 }

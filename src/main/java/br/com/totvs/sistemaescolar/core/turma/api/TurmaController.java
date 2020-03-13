@@ -56,7 +56,7 @@ public class TurmaController {
 				turmaDto.getAlunoId(),
 				turmaDto.getDisciplinaId());
 		TurmaId id = service.handle(cmd);
-			
+					
 		return ResponseEntity.created(
 				ServletUriComponentsBuilder
 				.fromCurrentRequest()
