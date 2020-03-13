@@ -33,7 +33,7 @@ public class ProfessorController {
 	@Autowired
 	private ValidatorService validator;
 
-	@ApiOperation(value = "API para adicionar um professores", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "API para adicionar um professores, adicionar uma discplina ao professor por vez.", httpMethod = "POST", consumes = APPLICATION_JSON_VALUE)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Professor criado."), })
 
 	@PostMapping
@@ -52,6 +52,8 @@ public class ProfessorController {
 				CPF.of(professorDto.getCpf().getNumero()), 
 				professorDto.getTitulo(),
 				professorDto.getDisciplinaId());
+		
+		System.out.println("entrou0"+ professorDto.getDisciplinaId());
 
 		ProfessorId id = service.handle(cmd);
 

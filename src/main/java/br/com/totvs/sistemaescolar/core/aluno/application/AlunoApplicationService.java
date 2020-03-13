@@ -66,7 +66,7 @@ public class AlunoApplicationService {
 				.cpf(aluno.getCpf().getNumero())
 				.matricula(aluno.getMatricula().toString())
 				.formaIngresso(aluno.getFormaIngresso().toString())
-				.turmaId(cmd.getTurmaId().toString())
+				.turmaId(cmd.getTurmaId()!=null?cmd.getTurmaId().toString():"")
 				.build());
 
 		return aluno.getId();

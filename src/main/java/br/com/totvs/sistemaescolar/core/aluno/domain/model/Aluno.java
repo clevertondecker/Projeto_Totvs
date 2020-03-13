@@ -32,18 +32,14 @@ public class Aluno extends Pessoa {
 
 	@Builder
 	public Aluno(@NonNull AlunoId id, String nome, String email, CPF cpf, Long matricula,
-			formaDeIngresso formaIngresso,List<TurmaId> turmasId) {
+			formaDeIngresso formaIngresso) {
 		super(nome, email, cpf);
 		this.id = id;
 		this.matricula = matricula;
 		this.formaIngresso = formaIngresso;
 		
-		if(turmasId !=null)
-		this.turmas.addAll(turmasId);
+		
 	}
 	
-	public void adicionarTurma(TurmaId turmaId) {
-		turmas.add(turmaId);
-	}
 
 }

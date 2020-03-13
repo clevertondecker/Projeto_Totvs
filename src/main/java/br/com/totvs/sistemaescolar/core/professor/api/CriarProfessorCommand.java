@@ -1,6 +1,7 @@
 package br.com.totvs.sistemaescolar.core.professor.api;
 
 
+
 import br.com.totvs.sistemaescolar.core.disciplina.domain.model.DisciplinaId;
 import br.com.totvs.sistemaescolar.core.pessoa.domain.model.CPF;
 import br.com.totvs.sistemaescolar.core.professor.domain.model.ProfessorId;
