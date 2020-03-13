@@ -9,6 +9,7 @@ import br.com.totvs.sistemaescolar.core.aluno.amqp.events.AlunoCriadoEvent;
 import br.com.totvs.sistemaescolar.core.amqp.YMSPublisher;
 import br.com.totvs.sistemaescolar.core.disciplina.domain.model.Disciplina;
 import br.com.totvs.sistemaescolar.core.disciplina.domain.model.DisciplinaDomainRepository;
+import br.com.totvs.sistemaescolar.core.disciplina.domain.model.DisciplinaId;
 import br.com.totvs.sistemaescolar.core.pessoa.exception.VerificaCpfDuplicadoException;
 import br.com.totvs.sistemaescolar.core.professor.amqp.events.ProfessorCriadoEvent;
 import br.com.totvs.sistemaescolar.core.professor.api.CriarProfessorCommand;
@@ -42,20 +43,20 @@ public class ProfessorApplicationService {
 				.cpf(cmd.getCpf())
 				.titulo(cmd.getTitulo())
 				.build();
-		
+	
 		/*Recupera a disciplina do banco de dados e adicionar o professor nela.*/
 		if(cmd.getDisciplinaId()!=null) {
  		Optional<Disciplina> optionalDisciplina = disciplinaRepository.getByDisciplinaId(cmd.getDisciplinaId().toString());
-		System.out.println("Entrou");
- 		optionalDisciplina.ifPresent(turma -> {
+ 		optionalDisciplina.ifPresent(disciplina -> {
 
- 			turma.adicionarProfessor(professorId);
-			disciplinaRepository.update(turma);
+ 			disciplina.adicionarProfessor(professorId);
+			disciplinaRepository.update(disciplina);			
 		});
 		}
 		
 		this.professorRepository.insert(professor);
 		
+	
 		/* Publica aluno no evento.*/
 		sistemaEscolaPublisher.publish(ProfessorCriadoEvent.builder()
 				.id(professor.getId().toString())
@@ -63,7 +64,7 @@ public class ProfessorApplicationService {
 				.email(professor.getEmail())
 				.cpf(professor.getCpf().getNumero())
 				.titulo(professor.getTitulo().toString())
-				.disciplinaId(cmd.getDisciplinaId().toString())
+				.disciplinaId(cmd.getDisciplinaId()!=null?cmd.getDisciplinaId().toString():"")
 				.build());
 		
 		return professor.getId();

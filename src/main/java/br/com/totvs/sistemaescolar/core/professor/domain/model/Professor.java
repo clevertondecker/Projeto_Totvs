@@ -27,6 +27,5 @@ public class Professor extends Pessoa {
 		super(nome, email, cpf);
 		this.id = id;
 		this.titulo = titulo;
-
 	}
 }

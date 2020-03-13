@@ -19,7 +19,6 @@ public class TurmaApplicationService {
 	AlunoDomainRepository alunoDomainRepository;
 
 	public TurmaId handle(final CriarTurmaCommand cmd) {
-		System.out.println("ALUNOID : "+cmd.getDisciplinaId());
 		
 		Turma turma = Turma.builder()
 				.id(TurmaId.generate())

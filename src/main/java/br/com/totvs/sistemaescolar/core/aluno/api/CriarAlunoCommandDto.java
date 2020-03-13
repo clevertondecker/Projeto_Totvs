@@ -1,6 +1,8 @@
 package br.com.totvs.sistemaescolar.core.aluno.api;
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -34,5 +36,5 @@ public class CriarAlunoCommandDto {
 	@Valid
 	private CpfCommandDto cpf;
 	
-	private TurmaId turmaId;
+	private List<TurmaId> turmaId;
 }
